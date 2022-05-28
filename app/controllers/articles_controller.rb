@@ -15,10 +15,12 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    puts("new1")
   end
 
   # GET /articles/1/edit
   def edit
+    puts("edit2")
   end
 
   # POST /articles or /articles.json
