@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    puts("edit1")
   end
 
   # POST /articles or /articles.json
