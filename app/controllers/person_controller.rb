@@ -1,35 +1,38 @@
-class ArticlesController < ApplicationController
+class PersonController < ApplicationController
   #before_action :set_article, only: %i[ show edit update destroy ]
 
   # GET /articles or /articles.json
   def index
-    puts("index")
-    @articles = Article.all
+    @person = Person.all
 
   end
 
   # GET /articles/1 or /articles/1.json
   def show
-    puts("show")
-    @article = Article.find(params[:id])
+    @aperson = Person.find(params[:id])
   end
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @person = Person.new
   end
 
   # GET /articles/1/edit
-  def edit
 
-  end
 
   # POST /articles or /articles.json
   def create
-    @article = Article.new(params.require(:article).permit(:title, :description))
-    @article.save
-    #redirect_to article_path(@article)
-    redirect_to @article
+    @person = Person.new(article_params)
+
+    respond_to do |format|
+      if @person.save
+        format.html { redirect_to article_url(@person), notice: "Article was successfully created." }
+        format.json { render :show, status: :created, location: @person }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @person.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /articles/1 or /articles/1.json
@@ -47,14 +50,12 @@ class ArticlesController < ApplicationController
 
   # DELETE /articles/1 or /articles/1.json
   def destroy
+    @article.destroy
 
-
-
-
-    # respond_to do |format|
-    #   format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
-    #   format.json { head :no_content }
-    # end
+    respond_to do |format|
+      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -65,6 +66,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :description)
+      params.require(:person).permit(:name)
     end
 end
