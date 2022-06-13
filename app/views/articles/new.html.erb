@@ -1,4 +1,11 @@
-<h1>New Article</h1>
+<h1>Create New Article</h1>
+
+<% if @article.errors.any? %>
+  <h2>아티클 형식안맞음</h2>
+  <% @article.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+<% end %>
 
 <%#= render 'form', article: @article %>
 

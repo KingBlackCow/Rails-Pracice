@@ -27,9 +27,14 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = Article.new(params.require(:article).permit(:title, :description))
-    @article.save
+    if @article.save
     #redirect_to article_path(@article)
-    redirect_to @article
+      flash[:notice] = "Article was created successfully."
+      redirect_to @article
+    else
+      render 'new'
+    end
+
   end
 
   # PATCH/PUT /articles/1 or /articles/1.json
